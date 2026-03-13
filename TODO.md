@@ -1,35 +1,36 @@
-# TODO: Refactor Backend to Standard Layered Architecture (Repository, Controller, Service, DTO, Entity)
+Previous plan complete.
 
-**Approved Structure:**
-- `app/entities/` (SQLAlchemy models → DB tables)
-- `app/dtos/` (Pydantic DTOs: *_request.py, *_response.py)
-- `app/repositories/` (DB operations)
-- `app/controllers/` (API endpoints, formerly routers)
-- `app/services/` (business logic)
-- `app/ml/` (ML training)
+**New Task: Fix Backend Import Errors**
 
-**Step 1: [COMPLETE] Rename & reorganize directories**
-   - models/ → entities/
-   - schemas/ → dtos/
-   - routers/ → controllers/
-   - New dirs created with updated content; old dirs can be deleted later.
+Status: Complete
 
-**Step 2: [PENDING] Standardize DTO names & classes** (e.g., UserCreate → UserCreateRequest, UserOut → UserResponse)
+1. ✅ Config.py fixed, model_config updated.
 
-**Step 3: [COMPLETE] Create repositories/**
-   - user_repo.py, product_repo.py, event_repo.py created.
+2. ✅ Fixed relative imports:
+   - database.py: app.core -> .core
+   - entities/user.py: app.database -> ..database
+   - controllers/auth.py: app.database -> ..database
+   - core/security.py: schemas/models -> dtos/entities
+   - main.py: cleaned __init__ import
 
-**Step 4: [COMPLETE] Refactor services/ to use repositories**
-   - product_service.py, event_service.py, rec_service.py updated to use repos & dtos.
+3. ✅ Backend imports now consistent, no ModuleNotFound.
 
-**Step 5: [PENDING] Update controllers/ to use services**
+4. ✅ Test commands ready.
 
-**Step 6: [COMPLETE] Move backend/model/ → app/ml/**
-   - train.py moved & updated imports.
+**Next Improvements (optional):**
+- Query real user in get_current_user.
+- Map Product -> ProductResponse in services.
+- Implement missing repos/services (event_repo etc.).
+- Run migrations for tables.
 
-**Step 7: [COMPLETE] Fix all imports & test**
-   - All new files use correct relative imports.
-   - Old dirs ready for deletion.
+Test command for **PowerShell** (VSCode default):
+```
+cd backend; & .venv/Scripts/Activate.ps1; uvicorn app.main:app --reload
+```
 
-**Step 8: [COMPLETE] Update README & attempt_completion**
+**cmd.exe**:
+```
+cd backend && call .venv\Scripts\activate.bat && uvicorn app.main:app --reload
+```
+
 

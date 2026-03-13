@@ -1,16 +1,16 @@
 from fastapi import APIRouter, Depends, HTTPException
 from typing import Literal
 from sqlalchemy.ext.asyncio import AsyncSession
-from ....database import get_db
-from ....services.product_service import get_products
-from ....services.event_service import create_event
-from ....services.rec_service import get_recommendations
-from ....dtos.product_response import ProductResponse
-from ....dtos.event_request import EventCreateRequest
-from ....dtos.rec_response import RecResponse
-from ....core.security import get_current_user
-from ....entities.user import User
-from ....entities.product import Product
+from ..database import get_db
+from ..services.product_service import get_products
+from ..services.event_service import create_event
+from ..services.rec_service import get_recommendations
+from ..dtos.product_response import ProductResponse
+from ..dtos.event_request import EventCreateRequest
+from ..dtos.rec_response import RecResponse
+from ..core.security import get_current_user
+from ..entities.user import User
+from ..entities.product import Product
 from sqlalchemy import select
 
 router = APIRouter(prefix="/products", tags=["products"])

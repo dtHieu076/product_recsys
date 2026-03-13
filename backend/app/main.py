@@ -1,8 +1,8 @@
 from fastapi import FastAPI
-from . import __init__
+from .__init__ import app
 from .controllers import auth, products
 
-app = __init__.app
+
 app.include_router(auth.router)
 app.include_router(products.router, prefix="/api")
 

@@ -5,8 +5,8 @@ from passlib.context import CryptContext
 from fastapi import Depends, HTTPException, status
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from .config import settings
-from ..schemas.user import UserOut
-from ..models.user import User
+from ..dtos.user_response import UserResponse as UserOut
+from ..entities.user import User
 from sqlalchemy.ext.asyncio import AsyncSession
 from ..database import get_db
 

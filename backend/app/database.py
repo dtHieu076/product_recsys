@@ -1,21 +1,19 @@
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession, async_sessionmaker
-from sqlalchemy.orm import declarative_base
-from pydantic_settings import BaseSettings
+from sqlalchemy.orm import DeclarativeBase  # Thêm dòng này
+from .core.config import settings
 
-class Settings(BaseSettings):
-    DB_URL: str
+DATABASE_URL = settings.DB_URL
+if DATABASE_URL.startswith("postgresql://"):
+    DATABASE_URL = DATABASE_URL.replace("postgresql://", "postgresql+asyncpg://", 1)
 
-    class Config:
-        env_file = ".env"
+engine = create_async_engine(DATABASE_URL, echo=True)
 
-settings = Settings()
+# Định nghĩa Base ở đây
+class Base(DeclarativeBase):
+    pass
 
-engine = create_async_engine(settings.DB_URL, echo=True)
-AsyncSessionLocal = async_sessionmaker(engine, class_=AsyncSession, expire_on_commit=False)
-
-Base = declarative_base()
+async_session = async_sessionmaker(engine, class_=AsyncSession, expire_on_commit=False)
 
 async def get_db():
-    async with AsyncSessionLocal() as session:
+    async with async_session() as session:
         yield session
-
