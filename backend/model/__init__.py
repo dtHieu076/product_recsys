@@ -1,2 +1,0 @@
-# ALS model placeholder
-

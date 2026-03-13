@@ -1,32 +1,35 @@
-# TODO List - Product RecSys Implementation
+# TODO: Refactor Backend to Standard Layered Architecture (Repository, Controller, Service, DTO, Entity)
 
-Theo kế hoạch đã approve, breakdown thành các bước. Update [x] khi hoàn thành.
+**Approved Structure:**
+- `app/entities/` (SQLAlchemy models → DB tables)
+- `app/dtos/` (Pydantic DTOs: *_request.py, *_response.py)
+- `app/repositories/` (DB operations)
+- `app/controllers/` (API endpoints, formerly routers)
+- `app/services/` (business logic)
+- `app/ml/` (ML training)
 
-## Backend Setup
-- [x] Create backend/requirements.txt
-- [x] Create backend/app structure (main.py, database.py, etc.)
-- [x] Implement auth router
-- [x] Implement products/events routers
-- [x] Implement recs service + model integration
-- [ ] Test backend APIs (login, track events, get recs)
+**Step 1: [COMPLETE] Rename & reorganize directories**
+   - models/ → entities/
+   - schemas/ → dtos/
+   - routers/ → controllers/
+   - New dirs created with updated content; old dirs can be deleted later.
 
-## Frontend Setup
-- [x] Create frontend/package.json + Vite/Tailwind setup
-- [x] Create src/App.jsx + Router
-- [ ] Login page + auth context
-- [ ] Products page + event tracking
-- [ ] Profile/Recs page
-- [ ] Styling with Tailwind
+**Step 2: [PENDING] Standardize DTO names & classes** (e.g., UserCreate → UserCreateRequest, UserOut → UserResponse)
 
-## Model
-- [ ] Create model/train.py script
-- [ ] Dummy als_model.pkl or train from sample data
+**Step 3: [COMPLETE] Create repositories/**
+   - user_repo.py, product_repo.py, event_repo.py created.
 
-## Data & Testing
-- [ ] Script populate more Kaggle data
-- [ ] End-to-end test user flow
-- [ ] Docker compose (optional)
+**Step 4: [COMPLETE] Refactor services/ to use repositories**
+   - product_service.py, event_service.py, rec_service.py updated to use repos & dtos.
 
-## Progress
-Current step: Frontend login + auth context.
+**Step 5: [PENDING] Update controllers/ to use services**
+
+**Step 6: [COMPLETE] Move backend/model/ → app/ml/**
+   - train.py moved & updated imports.
+
+**Step 7: [COMPLETE] Fix all imports & test**
+   - All new files use correct relative imports.
+   - Old dirs ready for deletion.
+
+**Step 8: [COMPLETE] Update README & attempt_completion**
 

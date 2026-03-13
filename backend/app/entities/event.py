@@ -1,6 +1,6 @@
 from sqlalchemy import BigInteger, TIMESTAMP, String, ForeignKey, Column, text
 from sqlalchemy.types import Enum
-from ..database import Base
+from ...database import Base
 import enum
 
 class ActionType(str, enum.Enum):

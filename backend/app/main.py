@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from . import __init__
-from .routers import auth, products
+from .controllers import auth, products
 
 app = __init__.app
 app.include_router(auth.router)

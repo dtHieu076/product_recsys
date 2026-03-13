@@ -1,8 +1,9 @@
 from pydantic import BaseModel
 from typing import Optional
 from decimal import Decimal
+from ..entities.product import Product
 
-class ProductOut(BaseModel):
+class ProductResponse(BaseModel):
     product_id: int
     category_id: Optional[int]
     brand: Optional[str]

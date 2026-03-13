@@ -33,12 +33,14 @@ product_recsys/
 │   │   ├── __init__.py
 │   │   ├── main.py          # FastAPI app
 │   │   ├── database.py      # DB connection
-│   │   ├── models/          # Pydantic/SQLAlchemy models
-│   │   ├── schemas/         # Pydantic schemas
-│   │   ├── routers/
-│   │   ├── services/
+│   │   ├── entities/        # SQLAlchemy entities (DB models)
+│   │   ├── dtos/            # Pydantic DTOs (request/response)
+│   │   ├── repositories/    # DB repositories
+│   │   ├── controllers/     # API controllers
+│   │   ├── services/        # Business services
+│   │   ├── ml/              # ML training
 │   │   └── core/            # Config, security
-│   ├── model/               # ALS model files
+│   └── requirements.txt
 │   ├── requirements.txt
 │   └── .env                 # DB_URL
 ├── frontend/                # React app
